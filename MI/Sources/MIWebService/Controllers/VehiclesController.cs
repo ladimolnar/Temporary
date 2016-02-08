@@ -16,7 +16,7 @@ namespace MIWebService.Controllers
             _repository = ServiceLocator.GetRepository();
         }
 
-        // GET api/claims/c-002/vehicles/1M8GDM9AXKP000002
+        // GET api/claims/22c9c23bac142856018ce14a26b6c299/vehicles/1M8GDM9AXKP000002
         public VehicleDetails Get(string claimNumber, [FromUri]string vin)
         {
             MitchellClaim claim;
