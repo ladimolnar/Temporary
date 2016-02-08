@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{ECDA95ED-1621-42C0-9D71-5794DED4D61D}"
 	ProjectSection(SolutionItems) = preProject
 		Docs\Fiddler.txt = Docs\Fiddler.txt
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIModels", "MIModels\MIModels.csproj", "{5AF39B23-3FAC-40E5-ACD8-08CF6A4F51AC}"
