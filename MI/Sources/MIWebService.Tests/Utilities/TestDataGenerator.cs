@@ -181,6 +181,9 @@ namespace MIWebService.Tests.Utilities
       <cla:ModelYear>2014</cla:ModelYear>
       <cla:LicPlateExpDate>2017-01-03T00:00:00.000+00:00</cla:LicPlateExpDate>
     </cla:VehicleDetails>
+    <cla:VehicleDetails>
+      <cla:Vin>1M8GDM9AXKP000002</cla:Vin>
+    </cla:VehicleDetails>
   </cla:Vehicles>
 </cla:MitchellClaim>";
         }

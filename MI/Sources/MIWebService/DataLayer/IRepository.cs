@@ -46,8 +46,19 @@ namespace MIWebService.DataLayer
 
         /// <summary>
         /// Update the given claim.
-        /// The <paramref name="updater"/> parameter may have any field set to null except for the ClaimNumber.
+        /// The <paramref name="updater"/> parameter may have any field set to null except for ClaimNumber.
         /// The fields that have a null value will be ignored during the update operation.
+        /// Rules regarding updating vehicles:
+        ///     - If the <paramref name="updater"/> does not have a list of vehicles then no vehicle is updated.
+        ///     - If the <paramref name="updater"/> contains a new vehicle (new based on its VIN number)
+        ///       then that vehicle is added to the claim being updated.
+        ///     - If the <paramref name="updater"/> contains a vehicle also found in the claim being updated 
+        ///       (based on its VIN number) then that vehicle is updated. 
+        ///     - If the <paramref name="updater"/> contains a vehicle also found in the claim being updated 
+        ///       (based on its VIN number) but the vehicle in the updater only has its VIN number specified then 
+        ///       then that vehicle is not changed in the claim being updated.
+        ///     - If the <paramref name="updater"/> does not contain a vehicle that is found in the claim being updated
+        ///       (based on its VIN number) then that vehicle is deleted from the claim being updated. 
         /// </summary>
         /// <exception cref="InvalidApiUsageException">
         /// Thrown if the claim was not found or if the claim once updated would get into an invalid state.

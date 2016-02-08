@@ -133,19 +133,39 @@ namespace MIModels
                 this.LossInfo.Update(updater.LossInfo);
             }
 
+            // Update or add vehicles present in the updater.
             if (updater.Vehicles != null)
             {
-                foreach (VehicleDetails vehicleDetails in updater.Vehicles)
+                foreach (VehicleDetails updaterVehicleDetails in updater.Vehicles)
                 {
-                    VehicleDetails existingVehicle = this.Vehicles.FirstOrDefault(v => v.Vin == vehicleDetails.Vin);
+                    VehicleDetails existingVehicle =
+                        this.Vehicles.FirstOrDefault(v => v.Vin == updaterVehicleDetails.Vin);
                     if (existingVehicle != null)
                     {
-                        existingVehicle.Update(vehicleDetails);
+                        existingVehicle.Update(updaterVehicleDetails);
                     }
                     else
                     {
-                        this.Vehicles.Add(vehicleDetails.DeepClone());
+                        this.Vehicles.Add(updaterVehicleDetails.DeepClone());
                     }
+                }
+
+                // Now handle vehicle deletion.
+                // Vehicles that are present in the current claim but absent in the updater will be deleted.
+                List<VehicleDetails> vehiclesToDelete = new List<VehicleDetails>();
+                foreach (VehicleDetails existingVehicleDetails in this.Vehicles)
+                {
+                    if (updater.Vehicles.FirstOrDefault(v => v.Vin == existingVehicleDetails.Vin) == null)
+                    {
+                        // A vehicle that was found in this claim is absent from the updater.
+                        // This is an indication that the existing vehicle should be deleted.
+                        vehiclesToDelete.Add(existingVehicleDetails);
+                    }
+                }
+
+                foreach (VehicleDetails vehicleToDelete in vehiclesToDelete)
+                {
+                    this.Vehicles.Remove(vehicleToDelete);
                 }
             }
         }
