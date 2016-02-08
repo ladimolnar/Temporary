@@ -1,11 +1,17 @@
 ﻿using System.Runtime.Serialization;
 
-[DataContract]
-public enum ClaimStatus
+namespace MIModels
 {
-    [EnumMember(Value = "OPEN")]
-    Open,
+    /// <summary>
+    /// Specifies the claim status.
+    /// </summary>
+    [DataContract]
+    public enum ClaimStatus
+    {
+        [EnumMember(Value = "OPEN")]
+        Open,
 
-    [EnumMember(Value = "CLOSED")]
-    Closed,
+        [EnumMember(Value = "CLOSED")]
+        Closed,
+    }
 }

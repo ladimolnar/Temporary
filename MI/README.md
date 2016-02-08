@@ -5,6 +5,13 @@
 All the projects in the solution are self contained. All dependencies are included via NuGet packages and should be retrieved by Visual Studio automatically.
 The solution was built and tested with Visual Studio 2015 (Update 1) Community edition.
 
+##Source code
+
+The web service is a simple ASP.NET Web API. The most relevant sources are: 
+- **Models**: See project MIModels (Portable Class Library)
+- **Controllers**: See Controllers\ClaimsController.cs and Controllers\VehiclesController.cs
+- **Test automation**: Implemented using Visual Studio tests. See project MIWebService.Tests. The test classes are under the folders Tests and IntegrationTests
+
 ##Testing the solution
 
 ###Test Automation
@@ -19,3 +26,5 @@ You can use various tools like Fiddler once the web service is running on the lo
 The document [Sources/Docs/Fiddler.txt](Sources/Docs/Fiddler.txt) contains more examples regarding how to access any of the APIs provided.  
 
 Before using Fiddler or another tool make sure that the web service is running.
+
+Note that the DEBUG build will generate a number of test claims automatically so simply accessing http://localhost:57732/api/claims should provide you with some results.

@@ -2,6 +2,9 @@
 
 namespace MIModels
 {
+    /// <summary>
+    /// Specifies the cause of loss for a claim.
+    /// </summary>
     [DataContract]
     public enum CauseOfLoss
     {

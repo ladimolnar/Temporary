@@ -16,7 +16,12 @@ namespace MIWebService.Controllers
             _repository = ServiceLocator.GetRepository();
         }
 
-        // GET api/claims/22c9c23bac142856018ce14a26b6c299/vehicles/1M8GDM9AXKP000002
+        /// <summary>
+        /// Retrieves a vehicle details for a specified claim and vehicle as identified by the VIN number.
+        /// </summary>
+        /// <remarks>
+        /// GET api/claims/22c9c23bac142856018ce14a26b6c299/vehicles/1M8GDM9AXKP000002
+        /// </remarks>
         public VehicleDetails Get(string claimNumber, [FromUri]string vin)
         {
             MitchellClaim claim;

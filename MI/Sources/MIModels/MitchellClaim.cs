@@ -6,6 +6,10 @@ using MIModels.Utilities;
 
 namespace MIModels
 {
+    /// <summary>
+    /// Contains details about a claim.
+    /// Model class: this class is used to serialized and deserialize information exchanged via the MIWebService.
+    /// </summary>
     [DataContract(Namespace = "http://www.mitchell.com/examples/claim")]
     public class MitchellClaim
     {

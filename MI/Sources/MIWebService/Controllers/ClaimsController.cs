@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -21,13 +19,23 @@ namespace MIWebService.Controllers
             _repository = ServiceLocator.GetRepository();
         }
 
-        // GET api/<controller>
+        /// <summary>
+        /// Retrieves all claims from the system.
+        /// </summary>
+        /// <remarks>
+        /// GET api/<controller>
+        /// </remarks>
         public IEnumerable<MitchellClaim> Get()
         {
             return _repository.GetClaims();
         }
 
-        // GET api/<controller>/22c9c23bac142856018ce14a26b6c299
+        /// <summary>
+        /// Retrieves the specified claim from the system.
+        /// </summary>
+        /// <remarks>
+        /// GET api/<controller>/22c9c23bac142856018ce14a26b6c299
+        /// </remarks>
         public MitchellClaim Get(string claimNumber)
         {
             MitchellClaim claim;
@@ -39,21 +47,30 @@ namespace MIWebService.Controllers
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        // GET api/<controller>?minLossDate=...&maxLossDate=...
+        /// <summary>
+        /// Retrieves all claims that have the loss date in the specified time range.
+        /// </summary>
+        /// <remarks>
+        /// GET api/<controller>?minLossDate=...&maxLossDate=...
+        /// </remarks>
         public IEnumerable<MitchellClaim> Get(DateTime minLossDate, DateTime maxLossDate)
         {
             return _repository.GetClaimsInLossDateRange(minLossDate, maxLossDate);
         }
 
-        // POST api/<controller>
+        /// <summary>
+        /// Creates a new claim.
+        /// </summary>
+        /// <remarks>
+        /// POST api/<controller>
+        /// </remarks>
         public HttpResponseMessage Post([FromBody]MitchellClaim claim)
         {
             return AddClaim(claim);
         }
 
-        // PUT api/<controller>/22c9c23bac142856018ce14a26b6c299
         /// <summary>
-        /// Update an existing claim or add a new claim.
+        /// Update an existing claim or creates a new claim.
         /// Rules regarding updating vehicles:
         ///     - If the <paramref name="updater"/> does not have a list of vehicles then no vehicle is updated.
         ///     - If the <paramref name="updater"/> contains a new vehicle (new based on its VIN number)
@@ -66,6 +83,9 @@ namespace MIWebService.Controllers
         ///     - If the <paramref name="updater"/> does not contain a vehicle that is found in the claim being updated
         ///       (based on its VIN number) then that vehicle is deleted from the claim being updated. 
         /// </summary>
+        /// <remarks>
+        /// PUT api/<controller>/22c9c23bac142856018ce14a26b6c299
+        /// </remarks>
         public HttpResponseMessage Put(string claimNumber, [FromBody]MitchellClaim updater)
         {
             if (updater.ClaimNumber != null && claimNumber != updater.ClaimNumber)
@@ -86,7 +106,12 @@ namespace MIWebService.Controllers
             }
         }
 
-        // DELETE api/<controller>/22c9c23bac142856018ce14a26b6c299
+        /// <summary>
+        /// Deletes an existing claim.
+        /// </summary>
+        /// <remarks>
+        /// DELETE api/<controller>/22c9c23bac142856018ce14a26b6c299
+        /// </remarks>
         public HttpResponseMessage Delete(string claimNumber)
         {
             if (_repository.TryRemoveClaim(claimNumber))

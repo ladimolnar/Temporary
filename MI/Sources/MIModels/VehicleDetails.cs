@@ -4,6 +4,10 @@ using MIModels.Utilities;
 
 namespace MIModels
 {
+    /// <summary>
+    /// Contains information about a vehicle.
+    /// Model class: this class is used to serialized and deserialize information exchanged via the MIWebService.
+    /// </summary>
     [DataContract(Namespace = "http://www.mitchell.com/examples/claim")]
     public class VehicleDetails
     {
