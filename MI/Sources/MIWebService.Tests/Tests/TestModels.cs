@@ -7,6 +7,9 @@ namespace MIWebService.Tests
     [TestClass]
     public class TestModels
     {
+        /// <summary>
+        /// Test that the deep clone functionality implemented on type <see cref="MitchellClaim "/> works correctly.
+        /// </summary>
         [TestMethod]
         public void TestClaimDeepClone()
         {

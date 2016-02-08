@@ -8,9 +8,9 @@ The solution was built and tested with Visual Studio 2015 (Update 1) Community e
 ##Source code
 
 The web service is a simple ASP.NET Web API. The most relevant sources are: 
-- **Models**: See project MIModels (Portable Class Library)
-- **Controllers**: See Controllers\ClaimsController.cs and Controllers\VehiclesController.cs
-- **Test automation**: Implemented using Visual Studio tests. See project MIWebService.Tests. The test classes are under the folders Tests and IntegrationTests
+- **Models**: See project [MIModels](Sources/MIModels) (Portable Class Library)
+- **Controllers**: See [ClaimsController.cs](Sources/MIWebService/Controllers) and [VehiclesController.cs](Sources/MIWebService/VehiclesController.cs)
+- **Test automation**: Implemented using Visual Studio tests. See project [MIWebService.Tests](Sources/MIWebService.Tests). The test classes are under the folders [Tests](Sources/MIWebService.Tests/Tests) and [IntegrationTests](Sources/MIWebService.Tests/IntegrationTests)
 
 ##Testing the solution
 
