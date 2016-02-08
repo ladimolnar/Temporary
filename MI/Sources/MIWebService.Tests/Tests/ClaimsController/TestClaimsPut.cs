@@ -239,7 +239,7 @@ namespace MIWebService.Tests
         [TestMethod]
         public void TestPutAndCreate()
         {
-            // TODO: implement this.
+            // TODO: implement this. Not yet implemented. Present for documentation purposes.
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MIWebService.Tests
         [TestMethod]
         public void TestPutWithConflicts()
         {
-            // TODO: implement this.
+            // TODO: implement this. Not yet implemented. Present for documentation purposes.
         }
     }
 }

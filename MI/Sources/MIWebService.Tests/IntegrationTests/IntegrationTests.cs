@@ -63,6 +63,7 @@ namespace MIWebService.Tests.IntegrationTests
             try
             {
                 getRresponse = WebServiceHelpers.GetClaim(newClaimNumber);
+                Assert.Fail("An attempt to retrieve a claim that was deleted should result in an error.");
             }
             catch (WebException wex)
                 when (
@@ -80,7 +81,7 @@ namespace MIWebService.Tests.IntegrationTests
         [TestMethod]
         public void IntegrationTestVeryLargeStrings()
         {
-            // TODO: implement this.
+            // TODO: implement this. Not yet implemented. Present for documentation purposes.
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace MIWebService.Tests.IntegrationTests
         [TestMethod]
         public void TestGetVehicleByClaimAndVin()
         {
-            // TODO: implement this.
+            // TODO: implement this. Not yet implemented. Present for documentation purposes.
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MIWebService.Tests
         [TestMethod]
         public void TestGetByLossDateRange()
         {
-            // TODO: implement this.
+            // TODO: implement this. Not yet implemented. Present for documentation purposes.
         }
     }
 }
