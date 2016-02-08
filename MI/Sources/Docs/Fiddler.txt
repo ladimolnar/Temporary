@@ -1,0 +1,140 @@
+This file contains information used to compose Fiddler requests in order to manually test the MIWebService
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims
+GET:
+User-Agent: Fiddler
+Accept: text/xml
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims
+POST:
+User-Agent: Fiddler
+Content-Type: text/xml
+
+<cla:MitchellClaim xmlns:cla="http://www.mitchell.com/examples/claim">
+  <cla:ClaimNumber>c-001</cla:ClaimNumber>
+  <cla:ClaimantFirstName>George</cla:ClaimantFirstName>
+  <cla:ClaimantLastName>Washington</cla:ClaimantLastName>
+  <cla:Status>OPEN</cla:Status>
+  <cla:LossDate>2014-07-09T17:19:13.631-07:00</cla:LossDate>
+  <cla:LossInfo>
+    <cla:CauseOfLoss>Collision</cla:CauseOfLoss>
+    <cla:ReportedDate>2014-07-10T17:19:13.676-07:00</cla:ReportedDate>
+    <cla:LossDescription>Crashed into an apple tree.</cla:LossDescription>
+  </cla:LossInfo>
+  <cla:AssignedAdjusterID>12345</cla:AssignedAdjusterID>
+  <cla:Vehicles>
+    <cla:VehicleDetails>
+      <cla:Vin>1M8GDM9AXKP042788</cla:Vin>
+      <cla:ModelYear>2015</cla:ModelYear>
+      <cla:MakeDescription>Ford</cla:MakeDescription>
+      <cla:ModelDescription>Mustang</cla:ModelDescription>
+      <cla:EngineDescription>EcoBoost</cla:EngineDescription>
+      <cla:ExteriorColor>Deep Impact Blue</cla:ExteriorColor>
+      <cla:LicPlate>NO1PRES</cla:LicPlate>
+      <cla:LicPlateState>VA</cla:LicPlateState>
+      <cla:LicPlateExpDate>2015-03-10-07:00</cla:LicPlateExpDate>
+      <cla:DamageDescription>Front end smashed in. Apple dents in roof.</cla:DamageDescription>
+      <cla:Mileage>1776</cla:Mileage>
+    </cla:VehicleDetails>
+  </cla:Vehicles>
+</cla:MitchellClaim>
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims
+POST:
+User-Agent: Fiddler
+Content-Type: text/xml
+
+<cla:MitchellClaim xmlns:cla="http://www.mitchell.com/examples/claim">
+  <cla:ClaimNumber>c-002</cla:ClaimNumber>
+  <cla:ClaimantFirstName>F1</cla:ClaimantFirstName>
+  <cla:ClaimantLastName>L1</cla:ClaimantLastName>
+  <cla:Status>CLOSED</cla:Status>
+  <cla:LossDate>2016-01-02T03:04:05.006+00:00</cla:LossDate>
+  <cla:LossInfo>
+    <cla:CauseOfLoss>Mechanical Breakdown</cla:CauseOfLoss>
+    <cla:ReportedDate>2016-01-03T10:11:12.013+00:00</cla:ReportedDate>
+    <cla:LossDescription>Hit a telephone post.</cla:LossDescription>
+  </cla:LossInfo>
+  <cla:AssignedAdjusterID>12345</cla:AssignedAdjusterID>
+  <cla:Vehicles>
+    <cla:VehicleDetails>
+      <cla:Vin>1M8GDM9AXKP000001</cla:Vin>
+      <cla:ModelYear>2015</cla:ModelYear>
+      <cla:MakeDescription>Ford</cla:MakeDescription>
+      <cla:ModelDescription>Mustang</cla:ModelDescription>
+      <cla:EngineDescription>EcoBoost</cla:EngineDescription>
+      <cla:ExteriorColor>Deep Impact Blue</cla:ExteriorColor>
+      <cla:LicPlate>NO1PRES</cla:LicPlate>
+      <cla:LicPlateState>VA</cla:LicPlateState>
+      <cla:LicPlateExpDate>2017-01-02T00:00:00.000+00:00</cla:LicPlateExpDate>
+      <cla:DamageDescription>Front end smashed in. Apple dents in roof.</cla:DamageDescription>
+      <cla:Mileage>100500</cla:Mileage>
+    </cla:VehicleDetails>
+    <cla:VehicleDetails>
+      <cla:Vin>1M8GDM9AXKP000002</cla:Vin>
+      <cla:ModelYear>2015</cla:ModelYear>
+      <cla:MakeDescription>Nissan</cla:MakeDescription>
+      <cla:ModelDescription>Altima 2009</cla:ModelDescription>
+      <cla:EngineDescription>2.5 L</cla:EngineDescription>
+      <cla:ExteriorColor>Gray</cla:ExteriorColor>
+      <cla:LicPlate>7ABC123</cla:LicPlate>
+      <cla:LicPlateState>CA</cla:LicPlateState>
+      <cla:LicPlateExpDate>2016-09-10T00:00:00.000+00:00</cla:LicPlateExpDate>
+      <cla:DamageDescription>Driver door dented</cla:DamageDescription>
+      <cla:Mileage>100123</cla:Mileage>
+    </cla:VehicleDetails>
+  </cla:Vehicles>
+</cla:MitchellClaim>
+
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims/c-001
+GET:
+User-Agent: Fiddler
+Accept: text/json
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims/c-002
+PUT
+User-Agent: Fiddler
+Content-Type: text/xml
+
+<cla:MitchellClaim xmlns:cla="http://www.mitchell.com/examples/claim">
+  <cla:ClaimNumber>c-002</cla:ClaimNumber>
+  <cla:ClaimantLastName>NewLastName</cla:ClaimantLastName>
+  <cla:Status>OPEN</cla:Status>
+  <cla:LossInfo>
+    <cla:CauseOfLoss>Collision</cla:CauseOfLoss>
+    <cla:LossDescription>Hit a telephone post and then rolled over.</cla:LossDescription>
+  </cla:LossInfo>
+  <cla:AssignedAdjusterID>12345</cla:AssignedAdjusterID>
+  <cla:Vehicles>
+    <cla:VehicleDetails>
+      <cla:Vin>1M8GDM9AXKP000001</cla:Vin>
+      <cla:ModelYear>2016</cla:ModelYear>
+    </cla:VehicleDetails>
+  </cla:Vehicles>
+</cla:MitchellClaim>
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims?minLossDate=1/1/2015&maxLossDate=1/1/2017
+GET:
+User-Agent: Fiddler
+Accept: text/xaml
+
+=================================================
+Composer
+URL: http://localhost:57732/api/claims/Claim-1/vehicles/1M8GDM9AXKP040001
+GET:
+User-Agent: Fiddler
+Accept: text/xaml
+

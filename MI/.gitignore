@@ -1,0 +1,9 @@
+Sources/.vs/config/applicationhost.config
+Sources/packages/
+Sources/MIWebService/bin/
+Sources/MIWebService.Tests/bin/
+Sources/MIWebService.Tests/obj/
+Sources/MIWebService/obj/
+Sources/MIModels/bin/
+Sources/MIModels/obj/
+Sources/MIModels/project.lock.json
