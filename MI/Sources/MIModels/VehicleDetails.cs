@@ -7,37 +7,37 @@ namespace MIModels
     [DataContract(Namespace = "http://www.mitchell.com/examples/claim")]
     public class VehicleDetails
     {
-        [DataMember(Order = 1)]
+        [DataMember(Order = 1, EmitDefaultValue = false)]
         public string Vin { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember(Order = 2, EmitDefaultValue = false)]
         public int? ModelYear { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 3, EmitDefaultValue = false)]
         public string MakeDescription { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 4, EmitDefaultValue = false)]
         public string ModelDescription { get; set; }
 
-        [DataMember(Order = 5)]
+        [DataMember(Order = 5, EmitDefaultValue = false)]
         public string EngineDescription { get; set; }
 
-        [DataMember(Order = 6)]
+        [DataMember(Order = 6, EmitDefaultValue = false)]
         public string ExteriorColor { get; set; }
 
-        [DataMember(Order = 7)]
+        [DataMember(Order = 7, EmitDefaultValue = false)]
         public string LicPlate { get; set; }
 
-        [DataMember(Order = 8)]
+        [DataMember(Order = 8, EmitDefaultValue = false)]
         public string LicPlateState { get; set; }
 
-        [DataMember(Order = 9)]
+        [DataMember(Order = 9, EmitDefaultValue = false)]
         public DateTime? LicPlateExpDate { get; set; }
 
-        [DataMember(Order = 10)]
+        [DataMember(Order = 10, EmitDefaultValue = false)]
         public string DamageDescription { get; set; }
 
-        [DataMember(Order = 11)]
+        [DataMember(Order = 11, EmitDefaultValue = false)]
         public int? Mileage { get; set; }
 
         public override int GetHashCode()

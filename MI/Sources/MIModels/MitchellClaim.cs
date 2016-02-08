@@ -12,25 +12,25 @@ namespace MIModels
         [DataMember(Order = 1)]
         public string ClaimNumber { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember(Order = 2, EmitDefaultValue = false)]
         public string ClaimantFirstName { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 3, EmitDefaultValue = false)]
         public string ClaimantLastName { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 4, EmitDefaultValue = false)]
         public ClaimStatus? Status { get; set; }
 
-        [DataMember(Order = 5)]
+        [DataMember(Order = 5, EmitDefaultValue = false)]
         public DateTime? LossDate { get; set; }
 
-        [DataMember(Order = 6)]
+        [DataMember(Order = 6, EmitDefaultValue = false)]
         public LossInfo LossInfo { get; set; }
 
-        [DataMember(Order = 7, Name = "AssignedAdjusterID")]
+        [DataMember(Order = 7, Name = "AssignedAdjusterID", EmitDefaultValue = false)]
         public long? AssignedAdjusterId { get; set; }
 
-        [DataMember(Order = 8)]
+        [DataMember(Order = 8, EmitDefaultValue = false)]
         public List<VehicleDetails> Vehicles { get; set; }
 
         public override int GetHashCode()

@@ -7,13 +7,13 @@ namespace MIModels
     [DataContract(Namespace = "http://www.mitchell.com/examples/claim")]
     public class LossInfo
     {
-        [DataMember(Order = 1)]
+        [DataMember(Order = 1, EmitDefaultValue = false)]
         public CauseOfLoss? CauseOfLoss { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember(Order = 2, EmitDefaultValue = false)]
         public DateTime? ReportedDate { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 3, EmitDefaultValue = false)]
         public string LossDescription { get; set; }
 
         public override int GetHashCode()
