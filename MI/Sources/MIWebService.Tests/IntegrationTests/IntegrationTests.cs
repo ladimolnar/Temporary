@@ -77,7 +77,18 @@ namespace MIWebService.Tests.IntegrationTests
         /// This test will generate a claim where all the string properties are set to maximum lengths for that particular property.
         /// This test will make sure that aspects like the web service settings or database schema will not cause strings to be truncated inappropriately.
         /// </summary>
+        [TestMethod]
         public void IntegrationTestVeryLargeStrings()
+        {
+            // TODO: implement this.
+        }
+
+        /// <summary>
+        /// A test that validates the retrieval of vehicles by claim number and VIN number.
+        /// Note: Even though we have a similar method in class TestVehiclesController it is worth having this here as well to make sure that the routing is setup correctly.
+        /// </summary>
+        [TestMethod]
+        public void TestGetVehicleByClaimAndVin()
         {
             // TODO: implement this.
         }

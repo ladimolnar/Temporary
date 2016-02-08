@@ -1,14 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MIModels;
-using MIWebService.Controllers;
-using MIWebService.DataLayer;
-using MIWebService.Infrastructure;
-using MIWebService.Tests.Utilities;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MIWebService.Tests.Tests
+namespace MIWebService.Tests
 {
     [TestClass]
     public class TestClaimsDelete: TestClaimsControllerBase

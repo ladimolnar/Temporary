@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MIModels;
 using MIWebService.Tests.Utilities;
 
-namespace MIWebService.Tests.Tests
+namespace MIWebService.Tests
 {
     [TestClass]
     public class TestClaimsPost: TestClaimsControllerBase

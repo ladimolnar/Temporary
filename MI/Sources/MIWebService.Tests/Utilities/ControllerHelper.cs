@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Hosting;
@@ -18,12 +17,20 @@ namespace MIWebService.Tests.Utilities
         /// Generates and returns an instance of type <see cref="ClaimsController"/> 
         /// that can be used in the context of test automation.
         /// </summary>
-        /// <returns></returns>
         public static ClaimsController GenerateClaimsController()
         {
             var claimsController = new ClaimsController();
             SetupControllerForTests(claimsController);
             return claimsController;
+        }
+
+        /// <summary>
+        /// Generates and returns an instance of type <see cref="VehiclesController"/> 
+        /// that can be used in the context of test automation.
+        /// </summary>
+        public static VehiclesController GenerateVehiclesController()
+        {
+            return new VehiclesController();
         }
 
         private static void SetupControllerForTests(ApiController controller)

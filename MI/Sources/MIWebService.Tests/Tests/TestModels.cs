@@ -2,7 +2,7 @@
 using MIModels;
 using MIWebService.Tests.Utilities;
 
-namespace MIWebService.Tests.Tests
+namespace MIWebService.Tests
 {
     [TestClass]
     public class TestModels

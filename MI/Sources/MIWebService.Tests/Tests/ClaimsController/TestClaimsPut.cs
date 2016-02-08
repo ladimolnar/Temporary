@@ -4,11 +4,9 @@ using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MIModels;
 using MIWebService.Controllers;
-using MIWebService.DataLayer;
-using MIWebService.Infrastructure;
 using MIWebService.Tests.Utilities;
 
-namespace MIWebService.Tests.Tests
+namespace MIWebService.Tests
 {
     [TestClass]
     public class TestClaimsPut : TestClaimsControllerBase

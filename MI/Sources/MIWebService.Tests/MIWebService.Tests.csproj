@@ -68,7 +68,9 @@
     <Compile Include="Tests\ClaimsController\TestClaimsPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\ClaimsController\TestClaimsControllerBase.cs" />
+    <Compile Include="Tests\TestControllerBase.cs" />
     <Compile Include="Tests\TestModels.cs" />
+    <Compile Include="Tests\VehiclesController\TestVehiclesController.cs" />
     <Compile Include="Utilities\ControllerHelper.cs" />
     <Compile Include="Utilities\SerializerHelper.cs" />
     <Compile Include="Utilities\TestDataGenerator.cs" />
