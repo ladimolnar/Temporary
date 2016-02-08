@@ -62,8 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\IntegrationTests.cs" />
-    <Compile Include="Tests\TestClaimsController.cs" />
+    <Compile Include="Tests\ClaimsController\TestClaimsDelete.cs" />
+    <Compile Include="Tests\ClaimsController\TestClaimsGet.cs" />
+    <Compile Include="Tests\ClaimsController\TestClaimsPut.cs" />
+    <Compile Include="Tests\ClaimsController\TestClaimsPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\ClaimsController\TestClaimsControllerBase.cs" />
     <Compile Include="Tests\TestModels.cs" />
     <Compile Include="Utilities\ControllerHelper.cs" />
     <Compile Include="Utilities\SerializerHelper.cs" />

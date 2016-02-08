@@ -11,111 +11,16 @@ using MIWebService.Tests.Utilities;
 namespace MIWebService.Tests.Tests
 {
     [TestClass]
-    public class TestClaimsController
+    public class TestClaimsPut : TestClaimsControllerBase
     {
-        readonly ClaimsController _claimsController;
-
-        static TestClaimsController()
-        {
-            // We can choose here to use a mock repository or the actual repository.
-            // Using a mock repository will push the test automation more towards a unit test approach.
-            // Using the actual repository will push the test automation more towards an integration test approach.
-            // For now we'll use the actual repository (which BTW, at this point, is a dummy in-memory version).
-            // In a real project we'd need to decide our test automation investment, how much we invest in
-            // integration tests and how much we invest in unit tests. The pros and cons for 
-            // both approaches are quite different. Those pros and cons also depend on the nature of the project 
-            // so this is worth discussing and planning in advance.
-            ServiceLocator.RegisterRepository(new Repository());
-        }
-
-        public TestClaimsController()
-        {
-            _claimsController = ControllerHelper.GenerateClaimsController();
-        }
-
         [TestMethod]
-        public void TestCreateSimple()
-        {
-            string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
-
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
-
-            Assert.AreEqual(testClaim, retrievedClaim, "The posted and retrieved claim should have the same values.");
-        }
-
-        [TestMethod]
-        public void TestCreateDuplicateClaim()
-        {
-            string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
-
-            response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Conflict, response.StatusCode, "A POST of a duplicate should fail with a specific status.");
-        }
-
-        [TestMethod]
-        public void TestCreateClaimWithNoVehicles()
-        {
-            string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
-
-            testClaim.Vehicles.Clear();
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "A POST of a claim that contains no vehicle information should fail with a specific status.");
-        }
-
-        [TestMethod]
-        public void TestCreateClaimWithNoClaimNumber()
-        {
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(null);
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "A POST of a claim that contains no claim number should fail with a specific status.");
-        }
-
-        [TestMethod]
-        public void TestCreateClaimWithRequiredParametersNotSpecified()
-        {
-            string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
-            testClaim.Vehicles[0].ModelYear = null;
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "A POST of a claim that has required fields that are not specified should fail with a specific status.");
-        }
-
-        // TODO: in a real application we'd have to confirm the desired behavior for this scenario.
-        [TestMethod]
-        public void TestCreateClaimWithDuplicateVehicles()
-        {
-            string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
-            MitchellClaim testClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
-
-            testClaim.Vehicles.Clear();
-            VehicleDetails vehicleDetails = TestDataGenerator.GetTestVehicle("1M8GDM9AXKP000001");
-            testClaim.Vehicles.Add(vehicleDetails);
-            testClaim.Vehicles.Add(vehicleDetails);
-
-            HttpResponseMessage response = _claimsController.Post(testClaim);
-            Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "A POST of a claim that contains duplicate vehicles should fail with a specific status.");
-        }
-
-        [TestMethod]
-        public void TestUpdateSimple()
+        public void TestPutSimple()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -145,23 +50,23 @@ namespace MIWebService.Tests.Tests
             sourceVehicle.Mileage = updaterVehicle.Mileage;
 
             // Update the claim.
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "A PUT of an existing claim should succeed.");
 
             // Retrieved the updated claim and compare it with the expected value.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was created, updated and retrieved should have the expected values.");
         }
 
         [TestMethod]
-        public void TestUpdateClaimAndAddNewVehicle()
+        public void TestPutClaimAndAddNewVehicle()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -190,24 +95,24 @@ namespace MIWebService.Tests.Tests
             expectedClaim.Vehicles.Add(newVehicle.DeepClone());
 
             // Update the claim.
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "A PUT of an existing claim should succeed.");
 
             // Retrieved the updated claim and compare it with the expected value.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim.Vehicles.Count, 3, "Defensive check - making sure that the expected claim was setup correctly.");
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was created, updated and retrieved should have the expected values.");
         }
 
         [TestMethod]
-        public void TestUpdateClaimAndDeleteVehicle()
+        public void TestPutClaimAndDeleteVehicle()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -228,11 +133,11 @@ namespace MIWebService.Tests.Tests
             expectedClaim.Vehicles.RemoveAt(1);
 
             // Update the claim.
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "A PUT of an existing claim should succeed.");
 
             // Retrieved the updated claim and compare it with the expected value.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim.Vehicles.Count, 1, "Defensive check - making sure that the expected claim was setup correctly.");
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was created, updated and retrieved should have the expected values.");
@@ -242,13 +147,13 @@ namespace MIWebService.Tests.Tests
         /// An update where the updater has no vehicles are specified is legal. All vehicles will be preserved unchanged.
         /// </summary>
         [TestMethod]
-        public void TestUpdateClaimWithNoVehicleList()
+        public void TestPutClaimWithNoVehicleList()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -258,11 +163,11 @@ namespace MIWebService.Tests.Tests
             expectedClaim.ClaimantLastName = updater.ClaimantLastName;
 
             // Update the claim.
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "A PUT of an existing claim should succeed.");
 
             // Retrieved the updated claim and compare it with the expected value.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim.Vehicles.Count, 2, "Defensive check - making sure that the expected claim was setup correctly.");
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was created, updated and retrieved should have the expected values.");
@@ -273,13 +178,13 @@ namespace MIWebService.Tests.Tests
         /// vehicle information from the claim being updated. That is considered an illegal request.
         /// </summary>
         [TestMethod]
-        public void TestUpdateClaimWithEmptyVehicleList()
+        public void TestPutClaimWithEmptyVehicleList()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -291,23 +196,23 @@ namespace MIWebService.Tests.Tests
             updater.Vehicles = new List<VehicleDetails>();
 
             // Update the claim.
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "An update request where the updater has an empty vehicle list is not legal.");
 
             // Retrieved the claim we attempted to update and make sure it did not change.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was subject to a failed update should not have changed.");
         }
 
         [TestMethod]
-        public void TestUpdateWithRequiredParametersNotSpecified()
+        public void TestPutWithRequiredParametersNotSpecified()
         {
             string newClaimNumber = TestDataGenerator.GenerateUniqueClaimNumber();
             MitchellClaim expectedClaim = TestDataGenerator.GetTestClaim(newClaimNumber);
 
             // Create a new claim
-            HttpResponseMessage response = _claimsController.Post(expectedClaim);
+            HttpResponseMessage response = ClaimsController.Post(expectedClaim);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode, "A POST of a new claim should succeed.");
 
             // Prepare a claim "updater".
@@ -321,11 +226,11 @@ namespace MIWebService.Tests.Tests
             updater.Vehicles.Add(new VehicleDetails() { Vin = TestDataGenerator.GenerateUniqueVinNumber(), Mileage = 100 });
 
             // Update the claim. 
-            response = _claimsController.Put(newClaimNumber, updater);
+            response = ClaimsController.Put(newClaimNumber, updater);
             Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode, "An update of a claim that would results in required fields that are not specified should fail with a specific status.");
 
             // Retrieved the claim we attempted to update and make sure it did not change.
-            MitchellClaim retrievedClaim = _claimsController.Get(newClaimNumber);
+            MitchellClaim retrievedClaim = ClaimsController.Get(newClaimNumber);
 
             Assert.AreEqual(expectedClaim, retrievedClaim, "The claim that was subject to a failed update should not have changed.");
         }
@@ -334,7 +239,7 @@ namespace MIWebService.Tests.Tests
         /// A test that validates creating a new claim via the PUT command.
         /// </summary>
         [TestMethod]
-        public void TestCreateViaPut()
+        public void TestPutAndCreate()
         {
             // TODO: implement this.
         }
@@ -345,44 +250,7 @@ namespace MIWebService.Tests.Tests
         /// When we get to implement this part we'll have to use ETags as a mechanism to detect conflicts.
         /// </summary>
         [TestMethod]
-        public void TestUpdateWithConflicts()
-        {
-            // TODO: implement this.
-        }
-
-        /// <summary>
-        /// A test that validates the retrieval of claims by the date range applied to the LossDate field.
-        /// </summary>
-        [TestMethod]
-        public void TestGetByLossDateRange()
-        {
-            // TODO: implement this.
-        }
-
-        /// <summary>
-        /// A test that validates the retrieval of vehicles by claim number and VIN number.
-        /// </summary>
-        [TestMethod]
-        public void TestGetVehicleByClaimAndVin()
-        {
-            // TODO: implement this.
-        }
-
-        /// <summary>
-        /// A test that validates the simple delete scenario.
-        /// </summary>
-        [TestMethod]
-        public void TestDeleteSimple()
-        {
-            // TODO: implement this.
-        }
-
-        /// <summary>
-        /// A test that validates the scenario where a delete is applied twice.
-        /// The second delete should return a status of "Not Found".
-        /// </summary>
-        [TestMethod]
-        public void TestDeleteNotExistentClaim()
+        public void TestPutWithConflicts()
         {
             // TODO: implement this.
         }
