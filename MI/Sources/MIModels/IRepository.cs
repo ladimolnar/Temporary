@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MIModels;
 using MIModels.Utilities;
 
-namespace MIWebService.DataLayer
+namespace MIModels
 {
     /// <summary>
     /// An interface that abstracts the access to a repository containing claim data.

@@ -1,4 +1,5 @@
 ﻿using System;
+using MIModels;
 using MIWebService.DataLayer;
 
 namespace MIWebService.Infrastructure

@@ -123,7 +123,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ServiceLocator.cs" />
-    <Compile Include="DataLayer\IRepository.cs" />
     <Compile Include="DataLayer\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
